@@ -1,8 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { VoteComponent } from './vote/vote.component';
+import { RankingComponent } from './ranking/ranking.component';
 
-const routes: Routes = [];
+
+//Define component routing
+const routes: Routes = [
+  { path: '', component: VoteComponent },
+  { path: 'vote', component: VoteComponent },
+  { path: 'ranking', component: RankingComponent },
+  { path: '**', redirectTo: ''}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
