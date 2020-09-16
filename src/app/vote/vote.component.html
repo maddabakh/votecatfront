@@ -1,1 +1,58 @@
-<p>vote works!</p>
+<!-- Vote component content-->
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <!-- displays a specific message based on the user's voting status -->
+      <h1 *ngIf="!voted" class="h3 mb-0 text-gray-800 center">Votez le chat le plus mignon</h1>
+      <h1 *ngIf="voted" class="h3 mb-0 text-gray-800 center">Merci pour votre vote</h1>
+    </div>
+    <div class="row">
+      <!-- Loop on the number of cats-->
+      <ng-container *ngFor="let cat of cats">
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 *ngIf="catVotedId===cat.id" class="m-0 font-weight-bold text-primary">Voted</h6>
+                    <div *ngIf="!voted || catVotedId===cat.id" class="dropdown no-arrow">
+                      <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                        
+                        <!-- show this button on the voted cat. This button is for cancelling vote-->
+                        <button *ngIf="catVotedId===cat.id" class="btn btn-primary btn-block" (click)="cancelVoteForCat(cat.id)" >
+                        Annulez vote
+                        </button>
+
+                        <!-- this div is visible only if the user has not vote yet-->
+                        <div *ngIf="catVotedId!=cat.id">
+                          <!-- this button id for voting-->
+                          <button  class="btn btn-primary btn-block" (click)="addVoteForCat(cat.id)" >
+                          Votez
+                          </button>
+
+                          <!-- Button for deleting image on displays-->
+                          <button class="btn btn-primary btn-user btn-block" (click)="dontShowCat(cat.id)" >
+                          Ne pas afficher
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                      <!-- image of the cat-->
+                      <img src="{{cat.url}}" class="img-fluid center" alt="Responsive image" >
+                    </div>
+                </div>
+                <div class="col-auto">
+                  <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
